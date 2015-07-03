@@ -37,3 +37,14 @@
 - Set the timezone: `timedatectl set-timezone America/Chicago`
 - Set the hostname: `hostnamectl set-hostname expresso`
 
+## Install Samba 4
+
+1. Update existing packages  
+  `pacman -Syu`
+2. Install Samba 4  
+  `pacman -Sy samba4`
+3. Install NTP for use as a time server (optional)  
+  `pacman -Sy ntp`
+4. Install cups print server package (optional)
+  `pacman -Sy cups`
+
