@@ -72,7 +72,30 @@
     nameserver 192.168.1.101
 ```
 
-1. Set to static IP `chattr +i /etc/resolv.conf`  
+1. Set to static IP  
+  `cp /etc/netctl/examples/ethernet-static /etc/netctl/`
+  `nano /etc/netctl/examples/ethernet-static`
+
+```
+Description='A basic static ethernet connection'
+Interface=eth0
+Connection=ethernet
+IP=static
+Address='192.168.1.101
+#Routes=('192.168.0.0/24 via 192.168.1.1')
+Gateway='192.168.1.254'
+DNS=('192.168.1.254')
+
+## For IPv6 autoconfiguration
+#IP6=stateless
+
+## For IPv6 static address configuration
+#IP6=static
+#Address6=('1234:5678:9abc:def::1/64' '1234:3456::123/96')
+#Routes6=('abcd::1234')
+#Gateway6='1234:0:123::abcd'
+```
+
 1. Enable `samba_dnsupdate` command, add the following to the `[global]` section of `/etc/samba/smb.conf`  
   `nsupdate command = /usr/sbin/samba_dnsupdate`  
 
