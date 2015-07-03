@@ -30,3 +30,10 @@
 1. Unmount the two partitions
   `umount boot root`  
 1. Insert into Raspberry Pi, default login/pass: root/root
+
+## Initial Setup
+
+- Change root password with `passwd`
+- Set the timezone: `timedatectl set-timezone America/Chicago`
+- Set the hostname: `hostnamectl set-hostname expresso`
+
