@@ -83,4 +83,6 @@ sudo -u www-data php occ db:convert-type --password <mysql pw> mysql oc_mysql 12
     ```
 6. Restart Apache  
     `service apache2 restart`  
+
+[Get a free SSL certificate](http://arstechnica.com/security/2009/12/how-to-get-set-with-a-secure-sertificate-for-free/1/)
 Connect to: `<server IP>/owncloud`
