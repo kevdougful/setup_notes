@@ -99,4 +99,38 @@ DNS=('192.168.1.254')
 1. Enable `samba_dnsupdate` command, add the following to the `[global]` section of `/etc/samba/smb.conf`  
   `nsupdate command = /usr/sbin/samba_dnsupdate`  
 
+### Configure NTP Service
+[Docs](https://wiki.archlinux.org/index.php/Samba_4_Active_Directory_domain_controller#NTPD)
+
+1. Backup `/etc/ntp.conf`  
+  `cp /etc/ntp.conf /etc/net.conf.bak`  
+1. `nano /etc/ntp.conf`  
+
+```
+# Associate to the public NTP pool servers
+server 0.pool.ntp.org
+server 1.pool.ntp.org
+server 2.pool.ntp.org
+
+# Location of drift file
+driftfile /var/lib/ntp/ntpd.drift
+
+# Location of the log file
+logfile /var/log/ntpd
+
+# Location of the update directory
+ntpsigndsocket /var/lib/samba/ntp_signd/
+
+# Restrictions
+restrict default kod limited nomodify notrap nopeer mssntp
+restrict 127.0.0.1
+restrict ::1
+restrict 0.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+restrict 1.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+restrict 2.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+```
+1. Start `ntpd` service  
+  `systemctl ntpd start`  
+  `systemctl ntpd enable`
+
 Mostly from [this link](http://blog.dabasinskas.net/installing-samba-4-domain-controller-on-raspberry-pi-running-archlinux-arm/)
