@@ -61,3 +61,19 @@
   `systemctl start samba`  
 1. Start Samba on boot  
   `systemctl enable samba`  
+1. Start ntpd and cups services on boot  
+  `systemctl enable ntpd cups`
+
+### Configure DNS Service
+1. Edit `/etc/resolv.conf`  
+
+```
+    domain coffwillhaus.com  
+    nameserver 192.168.1.101
+```
+
+1. Set to static IP `chattr +i /etc/resolv.conf`  
+1. Enable `samba_dnsupdate` command  
+  `nsupdate command = /usr/sbin/samba_dnsupdate`  
+
+Mostly from [this link](http://blog.dabasinskas.net/installing-samba-4-domain-controller-on-raspberry-pi-running-archlinux-arm/)
