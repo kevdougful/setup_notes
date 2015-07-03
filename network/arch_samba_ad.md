@@ -45,7 +45,7 @@
   `pacman -Sy samba4`
 1. Install NTP for use as a time server (optional)  
   `pacman -Sy ntp`
-1. Install cups print server package (optional)
+1. Install cups print server package (optional)  
   `pacman -Sy cups`
 
 ## Setup Samba as a Domain Controller
@@ -73,7 +73,7 @@
 ```
 
 1. Set to static IP `chattr +i /etc/resolv.conf`  
-1. Enable `samba_dnsupdate` command  
+1. Enable `samba_dnsupdate` command, add the following to the `[global]` section of `/etc/samba/smb.conf`  
   `nsupdate command = /usr/sbin/samba_dnsupdate`  
 
 Mostly from [this link](http://blog.dabasinskas.net/installing-samba-4-domain-controller-on-raspberry-pi-running-archlinux-arm/)
