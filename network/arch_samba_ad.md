@@ -59,5 +59,5 @@
 ### Start up Samba
 1. Start Samba  
   `systemctl start samba`  
-1. Start Samba on boot
+1. Start Samba on boot  
   `systemctl enable samba`  
