@@ -41,10 +41,15 @@
 
 1. Update existing packages  
   `pacman -Syu`
-2. Install Samba 4  
+1. Install Samba 4  
   `pacman -Sy samba4`
-3. Install NTP for use as a time server (optional)  
+1. Install NTP for use as a time server (optional)  
   `pacman -Sy ntp`
-4. Install cups print server package (optional)
+1. Install cups print server package (optional)
   `pacman -Sy cups`
 
+## Setup Samba as a Domain Controller
+### Provisioning the domain
+1. Create a new domain   
+  `samba-tool domain provision --realm=lab.local --domain=LAB --adminpass '<admin password>' --server-role=dc`
+1. 
