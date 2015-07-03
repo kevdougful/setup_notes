@@ -67,34 +67,34 @@
 ### Configure DNS Service
 1. Edit `/etc/resolv.conf`  
 
-```
-    domain coffwillhaus.com  
-    nameserver 192.168.1.101
-```
+    ```
+        domain coffwillhaus.com  
+        nameserver 192.168.1.101
+    ```
 
 1. Set to static IP  
   `cp /etc/netctl/examples/ethernet-static /etc/netctl/`
   `nano /etc/netctl/examples/ethernet-static`
 
-```
-Description='A basic static ethernet connection'
-Interface=eth0
-Connection=ethernet
-IP=static
-Address='192.168.1.101
-#Routes=('192.168.0.0/24 via 192.168.1.1')
-Gateway='192.168.1.254'
-DNS=('192.168.1.254')
-
-## For IPv6 autoconfiguration
-#IP6=stateless
-
-## For IPv6 static address configuration
-#IP6=static
-#Address6=('1234:5678:9abc:def::1/64' '1234:3456::123/96')
-#Routes6=('abcd::1234')
-#Gateway6='1234:0:123::abcd'
-```
+    ```
+    Description='A basic static ethernet connection'
+    Interface=eth0
+    Connection=ethernet
+    IP=static
+    Address='192.168.1.101
+    #Routes=('192.168.0.0/24 via 192.168.1.1')
+    Gateway='192.168.1.254'
+    DNS=('192.168.1.254')
+    
+    ## For IPv6 autoconfiguration
+    #IP6=stateless
+    
+    ## For IPv6 static address configuration
+    #IP6=static
+    #Address6=('1234:5678:9abc:def::1/64' '1234:3456::123/96')
+    #Routes6=('abcd::1234')
+    #Gateway6='1234:0:123::abcd'
+    ```
 
 1. Enable `samba_dnsupdate` command, add the following to the `[global]` section of `/etc/samba/smb.conf`  
   `nsupdate command = /usr/sbin/samba_dnsupdate`  
@@ -106,31 +106,36 @@ DNS=('192.168.1.254')
   `cp /etc/ntp.conf /etc/net.conf.bak`  
 1. `nano /etc/ntp.conf`  
 
-```
-# Associate to the public NTP pool servers
-server 0.pool.ntp.org
-server 1.pool.ntp.org
-server 2.pool.ntp.org
+    ```
+    # Associate to the public NTP pool servers
+    server 0.pool.ntp.org
+    server 1.pool.ntp.org
+    server 2.pool.ntp.org
+    
+    # Location of drift file
+    driftfile /var/lib/ntp/ntpd.drift
+    
+    # Location of the log file
+    logfile /var/log/ntpd
+    
+    # Location of the update directory
+    ntpsigndsocket /var/lib/samba/ntp_signd/
+    
+    # Restrictions
+    restrict default kod limited nomodify notrap nopeer mssntp
+    restrict 127.0.0.1
+    restrict ::1
+    restrict 0.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+    restrict 1.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+    restrict 2.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
+    ```
 
-# Location of drift file
-driftfile /var/lib/ntp/ntpd.drift
-
-# Location of the log file
-logfile /var/log/ntpd
-
-# Location of the update directory
-ntpsigndsocket /var/lib/samba/ntp_signd/
-
-# Restrictions
-restrict default kod limited nomodify notrap nopeer mssntp
-restrict 127.0.0.1
-restrict ::1
-restrict 0.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
-restrict 1.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
-restrict 2.pool.ntp.org mask 255.255.255.255 nomodify notrap nopeer noquery
-```
+1. Create the state directory and set permissions  
+  `install -d /var/lib/samba/ntp_signd`  
+  `chown root:ntp /var/lib/samba/ntp_signd`  
+  `chmod 0750 /var/lib/samba/ntp_signd`  
 1. Start `ntpd` service  
-  `systemctl ntpd start`  
-  `systemctl ntpd enable`
+  `systemctl start ntpd`  
+  `systemctl enable ntpd`
 
 Mostly from [this link](http://blog.dabasinskas.net/installing-samba-4-domain-controller-on-raspberry-pi-running-archlinux-arm/)
