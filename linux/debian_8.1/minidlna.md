@@ -24,3 +24,8 @@ friendly_name=MochaMedia
 ...
 inotify=yes
 ```
+Restart the service
+```
+sudo service minidlna restart
+sudo service minidlna force-reload
+```
