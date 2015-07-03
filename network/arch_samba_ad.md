@@ -98,7 +98,22 @@
 
 1. Enable `samba_dnsupdate` command, add the following to the `[global]` section of `/etc/samba/smb.conf`  
   `nsupdate command = /usr/sbin/samba_dnsupdate`  
-
+1. Create `/etc/resolv.conf.tail`  
+  `nano /etc/resolv.conf.tail`  
+  
+  ```
+  # Samba configuration
+  search coffwillhaus.com
+  # If using IPv6, uncomment the following line
+  #nameserver ::1
+  nameserver 127.0.0.1
+  ```
+  
+1. Set permissions  
+  `chmod 644 /etc/resolv.conf.tail`  
+1. Regenerate the new /etc/resolv.conf  
+  `resolvconf -u`  
+  
 ### Configure NTP Service
 [Docs](https://wiki.archlinux.org/index.php/Samba_4_Active_Directory_domain_controller#NTPD)
 
