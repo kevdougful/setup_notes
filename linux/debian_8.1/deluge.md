@@ -70,3 +70,4 @@ now we can go ahead and start the daemon back up:
 ```
 $ sudo /etc/init.d/deluge-daemon start
 ```
+remember to disable classic mode on your client and connect to the server's daemon using the username/password you just setup.
