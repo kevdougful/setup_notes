@@ -1,0 +1,31 @@
+# Deluge BitTorrent Setup
+
+### Setup a user for Deluge:
+```
+$ sudo adduser --disabled-password --system --home /home/deluge --group deluge
+
+Adding system user `deluge' (UID 109) ...
+Adding new group `deluge' (GID 116) ...
+Adding new user `deluge' (UID 109) with group `deluge' ...
+Creating home directory `/home/deluge' ...
+```
+
+### Download and install Deluge
+```
+$ sudo apt-get update && sudo apt-get install deluged deluge-webui
+```
+
+### Configure the daemon to run at boot
+
+To start deluge and the webui at boot, we need to have an init.d script set-up to start it during the boot process. Luckily for us, someone else has already written an init.d script, all we need to do is configure it, and copy it into our init.d directory. The first thing we need to do is create the /etc/default/deluge-daemon file. this is what passes the configuration to the OS.
+```
+$ sudo nano /etc/default/deluge-daemon
+```
+Paste the following into the new file and save.
+```
+# Configuration for /etc/init.d/deluge-daemon
+# The init.d script will only run if this variable non-empty.
+DELUGED_USER="deluge"
+# Should we run at startup?
+RUN_AT_STARTUP="YES"
+```
