@@ -29,3 +29,14 @@ DELUGED_USER="deluge"
 # Should we run at startup?
 RUN_AT_STARTUP="YES"
 ```
+Create the init.d script:
+```
+$ sudo nano /etc/init.d/deluge-daemon
+```
+Paste in the contents of [deluge-daemon](deluge-daemon)
+Now we need to make it executable, and update the boot process to reflect that we added it:
+```
+$ sudo chmod a+x /etc/init.d/deluge-daemon && sudo update-rc.d deluge-daemon defaults
+```
+From here, you should be able to reboot the server, and access the web interface from [hostnameofMediaServer]:8112.
+default password is "deluge"
