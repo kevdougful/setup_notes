@@ -40,3 +40,33 @@ $ sudo chmod a+x /etc/init.d/deluge-daemon && sudo update-rc.d deluge-daemon def
 ```
 From here, you should be able to reboot the server, and access the web interface from [hostnameofMediaServer]:8112.
 default password is "deluge"
+
+### Setup `deluge-console`
+First we need to download the console version of deluge so that we can configure a few settings:
+```
+$ sudo apt-get install deluge-console
+```
+Once it has finished installing go ahead and boot up deluge-console by typing:
+```
+$ sudo -H -u deluge deluge-console
+```
+in the console, allow remote connections to the daemon:
+```
+config -s allow_remote True
+```
+and exit:
+```
+exit
+```
+now we need to go ahead and shutdown the daemon
+```
+$ sudo /etc/init.d/deluge-daemon stop
+```
+and add a username and password for the daemon to the auth file:
+```
+$ sudo chmod -R 777 /home/deluge && sudo -H -u deluge echo username:password:10 >> /home/deluge/.config/deluge/auth
+```
+now we can go ahead and start the daemon back up:
+```
+$ sudo /etc/init.d/deluge-daemon start
+```
