@@ -9,3 +9,5 @@
 1. `sudo service ssh restart`
 
 `tail -f /var/log/auth.log` for errors.
+
+In `/etc/ssh/sshd_config` set `PasswordAuthentication no` to disable password login over SSH
