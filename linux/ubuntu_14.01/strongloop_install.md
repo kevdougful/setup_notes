@@ -22,7 +22,11 @@ might need this symlink: `sudo ln -s /usr/bin/nodejs /usr/bin/node`
 #### Install StrongLoop
 
 ```
-sudo chown -R $USER /usr/local/bin
-sudo chown -R $USER /usr/local/lib/node_modules
 npm install -g strongloop
+```
+
+#### You'll probably need git too
+
+```
+sudo apt-get install -y git
 ```
