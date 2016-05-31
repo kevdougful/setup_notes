@@ -35,3 +35,14 @@ export CUDA_ROOT=/usr/local/cuda
 export PATH=$PATH:$CUDA_ROOT/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_ROOT/lib64
 ```
+
+Install TensorFlow
+
+```
+# Ubuntu/Linux 64-bit, CPU only:
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
+
+# Ubuntu/Linux 64-bit, GPU enabled. Requires CUDA toolkit 7.5 and CuDNN v4.  For
+# other versions, see "Install from sources" below.
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
+```
