@@ -26,3 +26,12 @@ sudo mkdir -p /usr/local/cuda
 sudo cp lib64 /usr/local/cuda
 sudo cp include /usr/local/cuda
 ```
+
+Environment Variables
+
+```
+export CUDA_HOME=/usr/local/cuda
+export CUDA_ROOT=/usr/local/cuda
+export PATH=$PATH:$CUDA_ROOT/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_ROOT/lib64
+```
